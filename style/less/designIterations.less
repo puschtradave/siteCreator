@@ -1,0 +1,93 @@
+@import "functions";
+
+@space-interval: 1;
+@padding-from: 1;
+@padding-to: 200;
+@margin-from: 1;
+@margin-to: 200;
+
+//PADDING PIXELS
+.createIterationClassOneItem(p, @padding-from, @padding-to, padding, px, @space-interval);
+.createIterationClassOneItem(p-t, @padding-from, @padding-to, padding-top, px, @space-interval);
+.createIterationClassOneItem(p-b, @padding-from, @padding-to, padding-bottom, px, @space-interval);
+.createIterationClassOneItem(p-l, @padding-from, @padding-to, padding-left, px, @space-interval);
+.createIterationClassOneItem(p-r, @padding-from, @padding-to, padding-right, px, @space-interval);
+//PADDING VIEWPORT
+.createIterationClassOneItem(p, @padding-from, @padding-to, padding, vh, @space-interval, vh);
+.createIterationClassOneItem(p-t, @padding-from, @padding-to, padding-top, vh, @space-interval, vh);
+.createIterationClassOneItem(p-b, @padding-from, @padding-to, padding-bottom, vh, @space-interval, vh);
+.createIterationClassOneItem(p-l, @padding-from, @padding-to, padding-left, vw, @space-interval, vw);
+.createIterationClassOneItem(p-r, @padding-from, @padding-to, padding-right, vw, @space-interval, vw);
+//PADDING PERCENT
+.createIterationClassOneItem(p, 1, 10, padding, %, 1, -p);
+.createIterationClassOneItem(p, @padding-from, @padding-to, padding, %, @space-interval, p);
+.createIterationClassOneItem(p-t, @padding-from, @padding-to, padding-top, %, @space-interval, p);
+.createIterationClassOneItem(p-b, @padding-from, @padding-to, padding-bottom, %, @space-interval, p);
+.createIterationClassOneItem(p-l, @padding-from, @padding-to, padding-left, %, @space-interval, p);
+.createIterationClassOneItem(p-r, @padding-from, @padding-to, padding-right, %, @space-interval, p);
+
+//MARGIN PIXELS
+.createIterationClassOneItem(m, @margin-from, @margin-to, margin, px, @space-interval);
+.createIterationClassOneItem(m-t, @margin-from, @margin-to, margin-top, px, @space-interval);
+.createIterationClassOneItem(m-b, @margin-from, @margin-to, margin-bottom, px, @space-interval);
+.createIterationClassOneItem(m-l, @margin-from, @margin-to, margin-left, px, @space-interval);
+.createIterationClassOneItem(m-r, @margin-from, @margin-to, margin-right, px, @space-interval);
+//MARGIN VIEWPORT
+.createIterationClassOneItem(m-t, @margin-from, @margin-to, margin-top, vh, @space-interval, vh);
+.createIterationClassOneItem(m-b, @margin-from, @margin-to, margin-bottom, vh, @space-interval, vh);
+.createIterationClassOneItem(m-l, @margin-from, @margin-to, margin-left, vw, @space-interval, vw);
+.createIterationClassOneItem(m-r, @margin-from, @margin-to, margin-right, vw, @space-interval, vw);
+//MARGIN PERCENT
+.createIterationClassOneItem(m, @margin-from, @margin-to, margin, %, @space-interval, p);
+.createIterationClassOneItem(m-t, @margin-from, @margin-to, margin-top, %, @space-interval, p);
+.createIterationClassOneItem(m-b, @margin-from, @margin-to, margin-bottom, %, @space-interval, p);
+.createIterationClassOneItem(m-l, @margin-from, @margin-to, margin-left, %, @space-interval, p);
+.createIterationClassOneItem(m-r, @margin-from, @margin-to, margin-right, %, @space-interval, p);
+
+
+//.createIterationClassOneItem(@basicName, @start, @end, @element, @unit, @times: 1, @add: ~'')
+//WIDTH
+.createIterationClassOneItem(width, 0, 400, width, px, 5);
+.createIterationClassOneItem(width, 1, 20, width, %, 5, p);
+//MIN-WIDTH
+.createIterationClassOneItem(min-width, 0, 200, min-width, px, 5);
+.createIterationClassOneItem(min-width, 1, 20, min-width, %, 5, p);
+
+//HEIGHT
+.createIterationClassOneItem(height, 0, 100, height, px, 5);
+.createIterationClassOneItem(height, 1, 20, height, %, 5, p);
+//MIN-HEIGHT
+.createIterationClassOneItem(min-height, 0, 100, min-height, px, 5);
+.createIterationClassOneItem(min-height, 1, 20, min-height, %, 5, p);
+
+//FONT
+.createIterationClassOneItem(font, 1, 40, font-size, vh, .5, -vh);
+.createIterationClassOneItem(font, 1, 9, font-size, %, 1, -p);
+.createIterationClassOneItem(font, 2, 20, font-size, %, 5, -p);
+.createIterationClassOneItem(font, 1, 60, font-size, px, 1);
+//FONT WEIGHT
+.createIterationClassOneItem(font-weight, 1, 9, font-weight, ~'',100);
+
+//TOP BOTTOM RIGHT LEFT VIEWPORT
+.createIterationClassOneItem(top, 1, 20, top, vh, 5, vh);
+.createIterationClassOneItem(bottom, 1, 20, bottom, vh, 5, vh);
+.createIterationClassOneItem(right, 1, 20, right, vw, 5, vw);
+.createIterationClassOneItem(left, 1, 20, left, vw, 5, vw);
+
+//TOP BOTTOM RIGHT LEFT PERCENT
+.createIterationClassOneItem(top, 1, 20, top, %, 5, -p);
+.createIterationClassOneItem(bottom, 1, 20, bottom, %, 5, -p);
+.createIterationClassOneItem(right, 1, 20, right, %, 5, -p);
+.createIterationClassOneItem(left, 1, 20, left, %, 5, -p);
+//TOP BOTTOM RIGHT LEFT PIXELS
+.createIterationClassOneItem(top, 1, 100, top, px, 5);
+.createIterationClassOneItem(bottom, 1, 100, bottom, px, 5);
+.createIterationClassOneItem(right, 1, 100, right, px, 5);
+.createIterationClassOneItem(left, 1, 100, left, px, 5);
+
+//LINE HEIGHT
+.createIterationClassOneItem(line-height, 1, 100, line-height, px, 1);
+.createIterationClassOneItem(line-height, 20, 100, line-height, px, 5);
+
+//OPACITY
+.createIterationClassOneItem(opacity, 0, 10, opacity, ~'', 0.1);

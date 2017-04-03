@@ -1,0 +1,37 @@
+@import url("../../fonts/roboto/roboto.css");
+@import url("../../fonts/roboto-cond/roboto-cond.css");
+@import url("../../fonts/themify/themify-icons.css");
+@import url("../../fonts/font-awesome/font-awesome.min.css");
+@import url("../../fonts/poppins/poppins.css");
+@import url("../../fonts/openSans/openSans.css");
+@import url("../../fonts/droidSans/droidSans.css");
+@import url("../../fonts/abeezee/abeezee.css");
+@import url("../../fonts/aarg/aaargh.css");
+.myFont-roboto {
+  font-family: "Roboto"; }
+
+.myFont-roboto-cond {
+  font-family: "Roboto Condensed"; }
+
+.myFont-themify {
+  font-family: "themify"; }
+
+.myFont-font-awesome {
+  font-family: "FontAwesome"; }
+
+.myFont-poppins {
+  font-family: "Poppins"; }
+
+.myFont-openSans {
+  font-family: "OpenSans"; }
+
+.myFont-droidSans {
+  font-family: "DroidSans"; }
+
+.myFont-ABeeZee {
+  font-family: "ABeeZee"; }
+
+.myFont-Aargh {
+  font-family: "Aaargh"; }
+
+/*# sourceMappingURL=scss.css.map */

@@ -1,0 +1,205 @@
+.createIterationClassOneItem(@basicName, @number, @end, @element, @unit, @times: 1, @add: ~'') when (@number <= @end) {
+  @val: @number * @times;
+  @valSet: replace(~"@{val}", "\.", "p", "g");
+  .@{basicName}-@{valSet}@{add} {
+      @{element}: unit(@val, @unit);
+  }
+  .createIterationClassOneItem(@basicName, @number + 1, @end, @element, @unit, @times, @add);
+}
+
+.createSpaceClasses(@from, @end, @unit, @times: 1, @add: ~'') when (@from <= @end) {
+  @val: @from * @times;
+  //@valSet: replace(~"@{val}", "\.", "p", "g");
+  .vert-space-@{val}@{add} {
+    height: unit(@val, @unit);
+    width: 100%;
+    background: transparent;
+  }
+  .createSpaceClasses(@from + 1, @end, @unit, @times, @add);
+}
+
+.createFromUrlList(@classType, @cssAttr, @urlList, @counter) when  (@counter <= length(@urlList)){
+
+  @url: extract(@urlList, @counter);
+  @name: replace(replace(~"@{url}", "^(.*[\\\/])", ~""), "\.[^.]*$", ~"");
+
+  .@{classType}-@{name} {
+      @{cssAttr}: @url;
+  }
+
+  .createFromUrlList(@classType, @cssAttr, @urlList, @counter + 1)
+}
+
+.keyframes(@name; @arguments) {
+  @-moz-keyframes @name { @arguments();
+  }
+  @-webkit-keyframes @name { @arguments();
+  }
+  @keyframes @name { @arguments();
+  }
+}
+
+.executeAnimation(@arguments) {
+  -webkit-animation: @arguments;
+  -moz-animation: @arguments;
+  animation: @arguments;
+}
+
+.droidMono() {
+  font-style: italic;
+  font-weight: 400;
+}
+
+.droidBold() {
+  font-style: normal;
+  font-weight: 700;
+}
+
+//ROW 1
+.blendInVerySlow(@time, @id) {
+  .keyframes(~"@{id}-Frame"; { 0% {
+    opacity: 0;
+  } 70% {
+      opacity: 0;
+    } 100% {
+        opacity: 1;
+      } });
+  opacity: 1;
+  .executeAnimation(~"@{id}-Frame" @time);
+}
+
+.blendInSlow(@time, @id) {
+  .keyframes(~"@{id}-Frame"; { 0% {
+    opacity: 0;
+  } 60% {
+      opacity: 0;
+    } 100% {
+        opacity: 1;
+      } });
+  opacity: 1;
+  .executeAnimation(~"@{id}-Frame" @time);
+}
+
+.blendInMedium(@time, @id) {
+  .keyframes(~"@{id}-Frame"; { 0% {
+    opacity: 0;
+  } 40% {
+      opacity: 0;
+    } 100% {
+        opacity: 1;
+      } });
+  opacity: 1;
+  .executeAnimation(~"@{id}-Frame" @time);
+}
+
+.blendInFast(@time, @id) {
+  .keyframes(~"@{id}-Frame"; { 0% {
+    opacity: 0;
+  } 55% {
+      opacity: 0;
+    } 100% {
+        opacity: 1;
+      } });
+  opacity: 1;
+  .executeAnimation(~"@{id}-Frame" @time);
+}
+
+.blendInFastLeft(@time, @id) {
+  .keyframes(~"@{id}-Frame"; { 0% {
+    right: 100px;
+    opacity: 0;
+  } 100% {
+      right: 0;
+      opacity: 1;
+    } });
+  opacity: 1;
+  .executeAnimation(~"@{id}-Frame" @time);
+}
+
+.blendInFastRight(@time, @id) {
+  .keyframes(~"@{id}-Frame"; { 0% {
+    left: 100px;
+    opacity: 0;
+  } 100% {
+      left: 0;
+      opacity: 1;
+    } });
+  opacity: 1;
+  .executeAnimation(~"@{id}-Frame" @time);
+}
+
+//BLINK__BLINK__BLINK__BLINK__BLINK__BLINK__BLINK__BLINK__BLINK__BLINK__BLINK__BLINK__BLINK__BLINK__BLINK__BLINK__BLINK
+.blinkVerySlow(@id, @opacity) {
+  .keyframes(~"@{id}-Frame"; { 0% {
+    opacity: @opacity;
+  } 50% {
+      opacity: 1;
+    } 100% {
+        opacity: @opacity;
+      } });
+  .executeAnimation(~"@{id}-Frame" 2s linear infinite);
+}
+
+.blinkSlow(@id, @opacity) {
+  .keyframes(~"@{id}-Frame"; { 0% {
+    opacity: @opacity;
+  } 50% {
+      opacity: 1;
+    } 100% {
+        opacity: @opacity;
+      } });
+  .executeAnimation(~"@{id}-Frame" 1.5s linear infinite);
+}
+
+.blinkMedium(@id, @opacity) {
+  .keyframes(~"@{id}-Frame"; { 0% {
+    opacity: @opacity;
+  } 50% {
+      opacity: 1;
+    } 100% {
+        opacity: @opacity;
+      } });
+  .executeAnimation(~"@{id}-Frame" 1s linear infinite);
+}
+
+.blinkFast(@id, @opacity) {
+  .keyframes(~"@{id}-Frame"; { 0% {
+    opacity: @opacity;
+  } 50% {
+      opacity: 1;
+    } 100% {
+        opacity: @opacity;
+      } });
+  .executeAnimation(~"@{id}-Frame" .5s linear infinite);
+}
+
+//image___image___image___image___image___image___image___image___image___image___image___image___image___
+.translateImgSlowX(@id, @scale, @time) {
+  .keyframes(~"@{id}-Frame"; { 0% {
+    background-position: center center;
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+  } 25% {
+      background-position: 0% center;
+      transform: scale(@scale);
+      -webkit-transform: scale(@scale);
+    } 50% {
+        background-position: center center;
+        transform: scale(1.0);
+        -webkit-transform: scale(1.0);
+      } 75% {
+          background-position: 100% center;
+          transform: scale(@scale);
+          -webkit-transform: scale(@scale);
+        } 100% {
+            background-position: center center;
+            transform: scale(1.0);
+            -webkit-transform: scale(1.0);
+          } });
+  .executeAnimation(~"@{id}-Frame" @time linear infinite);
+}
+
+.bg-img-transition (@time){
+  -webkit-transition: background-image @time ease-in-out;
+  transition: background-image @time ease-in-out;
+}

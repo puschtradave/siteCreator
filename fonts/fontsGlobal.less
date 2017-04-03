@@ -1,0 +1,90 @@
+.boltNormal() {
+  font-weight: bold;
+  font-style: normal;
+}
+
+.loopItalic(@counterItalic, @withOutItalic, @weights) when (@counterItalic > 0) {
+  @newName: replace(@withOutItalic, extract(@weights, @counterItalic), ~'');
+  & when (@counterItalic = 1) {
+    & when (@newName = '') {
+      font-style: normal;
+    }
+    & when not (@newName = '') {
+      font-style: italic;
+    }
+  }
+  .loopItalic(@counterItalic - 1, @newName, @weights);
+}
+
+.getFontStyle(@name, @weights) {
+  @withOutItalic: @name;
+  @counterItalic: length(@weights);
+
+  .loopItalic(@counterItalic, @withOutItalic, @weights);
+}
+
+//300 Light, 400 Normal, Semi-Bold 600, Bold 700 and Extra Bold 800
+.getFontWeight(@allProps) {
+  @removeItalic: replace(@allProps, "Italic", ~"");
+  & when (@removeItalic = "Light") {
+    font-weight: 300;
+  }
+  & when (@removeItalic = "Normal") {
+    font-weight: 400;
+  }
+  & when (@removeItalic = "Semibold") {
+    font-weight: 600;
+  }
+  & when (@removeItalic = "Bold") {
+    font-weight: 700;
+  }
+  & when (@removeItalic = "ExtraBold") {
+    font-weight: 800;
+  }
+  & when (@removeItalic = "") {
+    font-weight: 400;
+  }
+  & when (@removeItalic = ~"") {
+    font-weight: 400;
+  }
+  & when (@removeItalic = "Regular") {
+    font-weight: 400;
+  }
+  & when (@removeItalic = "Mono") {
+    font-weight: 400;
+  }
+}
+
+.loopChars(@property, @string, @chars, @charCounter) when (@charCounter > 0) {
+  @charToRemove: extract(@chars, @charCounter);
+  @newString: replace(@string, @charToRemove, ~"");
+  & when (@charCounter = 1) {
+      @{property}: @newString;
+  }
+  .loopChars(@property, @newString, @chars, @charCounter - 1);
+}
+
+.deleteChars(@property, @string, @chars) {
+  @charCounter: length(@chars);
+  .loopChars(@property, @string, @chars, @charCounter);
+}
+
+
+.createFontFaces(@list, @counter, @fileEnding, @fontFamily) when (@counter > 0) {
+  @filename: extract(@list, @counter);
+  @fontNameRaw: replace(@filename, @fileEnding, ~'');
+  @fontName: replace(replace(replace(@filename, @fileEnding, ~''), "\s", ~"", 'g'), "-", ~"", 'g');
+  @allProps: replace(@fontName, @fontFamily, ~'');
+
+  @weights: "Bold", "ExtraBold", "Light", "Regular", "Semibold";
+  @chars: " ", "-";
+
+  @font-face {
+    .deleteChars(font-family, @fontFamily, @chars);
+    src: url(@filename);
+    .getFontStyle(@allProps, @weights);
+    .getFontWeight(@allProps);
+  }
+
+  .createFontFaces(@list, @counter - 1, @fileEnding, @fontFamily);
+}

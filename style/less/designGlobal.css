@@ -1,0 +1,27 @@
+.font-xl {
+  font-size: 50px;
+}
+.font-l {
+  font-size: 30px;
+}
+.font-m {
+  font-size: 15px;
+}
+.z-xs {
+  z-index: 10;
+}
+.z-sm {
+  z-index: 50;
+}
+.z-md {
+  z-index: 100;
+}
+.z-lg {
+  z-index: 500;
+}
+.z-xl {
+  z-index: 1000;
+}
+.z-xxl {
+  z-index: 10000;
+}

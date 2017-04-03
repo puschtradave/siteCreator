@@ -1,0 +1,35 @@
+/* Poppins Fontkit (LOCAL)
+-----------------------------------------*/
+
+/* Poppins Regular
+--------------------------------------*/
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('Poppins-Regular.ttf');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+/* Poppins Bold
+--------------------------------------*/
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('Poppins-Bold.ttf');
+    font-weight: bold;
+    font-style: normal;
+
+}
+
+/* Poppins Light
+--------------------------------------*/
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('Poppins-Light.ttf');
+    font-weight: 300;
+    font-style: normal;
+
+}
