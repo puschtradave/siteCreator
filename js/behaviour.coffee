@@ -24,28 +24,50 @@ class App.Index
 
   @Listeners: () ->
     App.Index.lookBoxes()
-    App.Index.ovalCenterOnClick()
-    App.Index.ovalCenterOnMouseMove()
+#    App.Index.ovalCenterOnClick()
+#    App.Index.ovalCenterOnMouseMove()
+    App.Index.ovalCenterChangeColorClick()
+    App.Index.ovalRightChangeColorClick()
 
 
-  @ovalCenterOnClick: () ->
-    $(".crOvalButton").on "click", (e) ->
+
+
+#  @ovalCenterOnClick: () ->
+#    $(".crOvalButton").on "click", (e) ->
+#      id = $(@).attr("id")
+#      finalTriangId = App.Index.getTriangleIdByAboveId(id, e)
+
+
+  @ovalCenterChangeColorClick: () ->
+    color = ""
+    $(".crOvalButton").mousedown (e) ->
       id = $(@).attr("id")
-      finalTriangId = App.Index.getTriangleIdByAboveId(id, e)
-#      $finalTriang = $("#" + finalTriangId)
-#      console.log finalTriangId
-
-  @ovalCenterOnMouseMove: () ->
-    $(".crOvalButton").on "mousemove", (e) ->
+      finalTriangId = App.Index.getTriangleIdByAboveIdOvalCenter(id, e)
+      if finalTriangId
+        $finalTriang = $("#" + finalTriangId)
+        borderStr = "border-"+App.Index.getNonTransparentBorder($finalTriang)+"-color"
+        color = App.Index.rgb2hex($finalTriang.css(borderStr))
+        $finalTriang.css(borderStr, App.Index.colorLuminance(color, "-0.5"))
+        $(".crOvalButton").mouseleave () ->
+          $(".crOvalButton").removeAttr("style")
+        $(".crOvalButton").mouseenter () ->
+          $(".crOvalButton").removeAttr("style")
+    .mouseup (e) ->
       id = $(@).attr("id")
-      finalTriangId = App.Index.getTriangleIdByAboveId(id, e)
-      $finalTriang = $("#" + finalTriangId)
-      console.log finalTriangId
+      finalTriangId = App.Index.getTriangleIdByAboveIdOvalCenter(id, e)
+      if finalTriangId
+        $finalTriang = $("#" + finalTriangId)
+        borderStr = "border-"+App.Index.getNonTransparentBorder($finalTriang)+"-color"
+        color = App.Index.rgb2hex($finalTriang.css(borderStr))
+        $finalTriang.removeAttr("style")
+    .mouseleave () ->
+      $(".crOvalButton").removeAttr("style")
 
-  @getTriangleIdByAboveId: (id, e) ->
+
+  @getTriangleIdByAboveIdOvalCenter: (id, e) ->
     switch id
-      when "crCenterLeftTopTriang"
-        $clicked = $("#crCenterLeftTopTriang")
+      when "crOvalCenterLeftTopTriang"
+        $clicked = $("#crOvalCenterLeftTopTriang")
         clickedHeight = $clicked.outerHeight()
         clickedWidth = $clicked.outerWidth()
         clickedXInElem = e.pageX - $clicked.offset().left
@@ -53,12 +75,12 @@ class App.Index
         fX = Math.round((-clickedHeight / clickedWidth) * clickedXInElem + clickedHeight)
 
         ret = () ->
-          return "crCenterLeftTopTriang" if fX - clickedYInElem > 0
-          return "crCenterTopLeftTriang" if fX - clickedYInElem < 0
+          return "crOvalCenterLeftTopTriang" if fX - clickedYInElem > 0
+          return "crOvalCenterTopLeftTriang" if fX - clickedYInElem < 0
           return false if fX - clickedYInElem == 0
         finalTriangId = ret()
-      when "crCenterRightTopTriang"
-        $clicked = $("#crCenterRightTopTriang")
+      when "crOvalCenterRightTopTriang"
+        $clicked = $("#crOvalCenterRightTopTriang")
         clickedHeight = $clicked.outerHeight()
         clickedWidth = $clicked.outerWidth()
         clickedXInElem = e.pageX - $clicked.offset().left
@@ -66,24 +88,24 @@ class App.Index
         fX = Math.round((clickedHeight / clickedWidth) * clickedXInElem)
 
         ret = () ->
-          return "crCenterRightTopTriang" if fX - clickedYInElem > 0
-          return "crCenterTopRightTriang" if fX - clickedYInElem < 0
+          return "crOvalCenterRightTopTriang" if fX - clickedYInElem > 0
+          return "crOvalCenterTopRightTriang" if fX - clickedYInElem < 0
           return false if fX - clickedYInElem == 0
         finalTriangId = ret()
-      when "crCenterLeftBottomTriang"
-        $clicked = $("#crCenterLeftBottomTriang")
+      when "crOvalCenterLeftBottomTriang"
+        $clicked = $("#crOvalCenterLeftBottomTriang")
         clickedHeight = $clicked.outerHeight()
         clickedWidth = $clicked.outerWidth()
         clickedXInElem = e.pageX - $clicked.offset().left
         clickedYInElem = $clicked.offset().top - e.pageY
         fX = Math.round((clickedHeight / clickedWidth) * clickedXInElem - clickedHeight)
         ret = () ->
-          return "crCenterLeftBottomTriang" if Math.abs(fX) - Math.abs(clickedYInElem) > 0
-          return "crCenterBottomLeftTriang" if Math.abs(fX) - Math.abs(clickedYInElem) < 0
+          return "crOvalCenterLeftBottomTriang" if Math.abs(fX) - Math.abs(clickedYInElem) > 0
+          return "crOvalCenterBottomLeftTriang" if Math.abs(fX) - Math.abs(clickedYInElem) < 0
           return false if Math.abs(fX) - Math.abs(clickedYInElem) == 0
         finalTriangId = ret()
-      when "crCenterRightBottomTriang"
-        $clicked = $("#crCenterRightBottomTriang")
+      when "crOvalCenterRightBottomTriang"
+        $clicked = $("#crOvalCenterRightBottomTriang")
         clickedHeight = $clicked.outerHeight()
         clickedWidth = $clicked.outerWidth()
         clickedXInElem = e.pageX - $clicked.offset().left
@@ -91,37 +113,131 @@ class App.Index
         fX = Math.round((-clickedHeight / clickedWidth) * clickedXInElem)
 
         ret = () ->
-          return "crCenterRightBottomTriang" if Math.abs(fX) - Math.abs(clickedYInElem) > 0
-          return "crCenterBottomRightTriang" if Math.abs(fX) - Math.abs(clickedYInElem) < 0
+          return "crOvalCenterRightBottomTriang" if Math.abs(fX) - Math.abs(clickedYInElem) > 0
+          return "crOvalCenterBottomRightTriang" if Math.abs(fX) - Math.abs(clickedYInElem) < 0
           return false if Math.abs(fX) - Math.abs(clickedYInElem) == 0
         finalTriangId = ret()
-      when "crCenterTopLeftTriang"
-        finalTriangId = "crCenterTopLeftTriang"
-      when "crCenterTopRightTriang"
-        finalTriangId = "crCenterTopRightTriang"
-      when "crCenterBottomLeftTriang"
-        finalTriangId = "crCenterBottomLeftTriang"
-      when "crCenterBottomRightTriang"
-        finalTriangId = "crCenterBottomRightTriang"
+      when "crOvalCenterTopLeftTriang"
+        finalTriangId = "crOvalCenterTopLeftTriang"
+      when "crOvalCenterTopRightTriang"
+        finalTriangId = "crOvalCenterTopRightTriang"
+      when "crOvalCenterBottomLeftTriang"
+        finalTriangId = "crOvalCenterBottomLeftTriang"
+      when "crOvalCenterBottomRightTriang"
+        finalTriangId = "crOvalCenterBottomRightTriang"
 
     return finalTriangId
 
   @getNonTransparentBorder: ($elem) ->
     list = ["top", "right", "bottom", "left"]
     retDir = ""
-    console.dir $elem
+#    console.dir $elem
     for dir in list
 #      ret = () ->
 #        return "border-"+dir
-      console.log dir
+#      console.log dir
 #      console.log "border-"+dir+"-color"
-      console.log $elem.css("border-"+dir+"-color")
+#      console.log $elem.css("border-"+dir+"-color")
       parsed = parseInt(App.Index.rgb2hex($elem.css("border-" + dir + "-color"), false), 16)
 #      console.log App.Index.rgb2hex($elem.css("border-"+dir+"-color"), false)
-      console.log parsed
+#      console.log parsed
       if parsed != 0 or isNaN(parsed)
         retDir = dir
     return retDir
+
+# OVAL RIGHT
+  @ovalRightChangeColorClick: () ->
+    color = ""
+    $("#crOvalRightContainer .crOvalButton").mousedown (e) ->
+      id = $(@).attr("id")
+#      console.log id
+      finalTriangId = App.Index.getTriangleIdByAboveIdOvalRight(id, e)
+      console.log finalTriangId
+      if finalTriangId
+        $finalTriang = $("#" + finalTriangId)
+        borderStr = "border-"+App.Index.getNonTransparentBorder($finalTriang)+"-color"
+        color = App.Index.rgb2hex($finalTriang.css(borderStr))
+        $finalTriang.css(borderStr, App.Index.colorLuminance(color, "-0.5"))
+        $(".crOvalButton").mouseleave () ->
+          $(".crOvalButton").removeAttr("style")
+        $(".crOvalButton").mouseenter () ->
+          $(".crOvalButton").removeAttr("style")
+    .mouseup (e) ->
+      id = $(@).attr("id")
+      finalTriangId = App.Index.getTriangleIdByAboveIdOvalRight(id, e)
+#      console.log finalTriangId
+      if finalTriangId
+        $finalTriang = $("#" + finalTriangId)
+        borderStr = "border-"+App.Index.getNonTransparentBorder($finalTriang)+"-color"
+        color = App.Index.rgb2hex($finalTriang.css(borderStr))
+        $finalTriang.removeAttr("style")
+    .mouseleave () ->
+      $(".crOvalButton").removeAttr("style")
+
+# OVAL RIGHT
+  @getTriangleIdByAboveIdOvalRight: (id, e) ->
+    switch id
+      when "crOvalRightTopLeftTriang"
+        $clicked = $("#crOvalRightTopLeftTriang")
+        clickedHeight = $clicked.outerHeight()
+        clickedWidth = $clicked.outerWidth()
+        clickedXInElem = e.pageX - $clicked.offset().left
+        clickedYInElem = e.pageY - $clicked.offset().top
+        fX = Math.round((-clickedHeight / clickedWidth) * clickedXInElem)
+
+        ret = () ->
+          return "crOvalRightTopLeftTriang" if Math.abs(fX) - Math.abs(clickedYInElem) > 0
+          return "crOvalRightLeftTopTriang" if Math.abs(fX) - Math.abs(clickedYInElem) < 0
+          return false if Math.abs(fX) - Math.abs(clickedYInElem) == 0
+        finalTriangId = ret()
+      when "crOvalRightRightTopTriang"
+        $clicked = $("#crOvalRightRightTopTriang")
+        clickedHeight = $clicked.outerHeight()
+        clickedWidth = $clicked.outerWidth()
+        clickedXInElem = e.pageX - $clicked.offset().left
+        clickedYInElem = ($clicked.offset().top + clickedHeight) - e.pageY
+        fX = Math.round((clickedHeight / clickedWidth) * clickedXInElem)
+
+        ret = () ->
+          return "crOvalRightRightTopTriang" if fX - clickedYInElem > 0
+          return "crOvalRightTopRightTriang" if fX - clickedYInElem < 0
+          return false if fX - clickedYInElem == 0
+        finalTriangId = ret()
+      when "crOvalRightBottomRightTriang"
+        $clicked = $("#crOvalRightBottomRightTriang")
+        clickedHeight = $clicked.outerHeight()
+        clickedWidth = $clicked.outerWidth()
+        clickedXInElem = e.pageX - $clicked.offset().left
+        clickedYInElem = e.pageY - $clicked.offset().top
+        fX = Math.round((-clickedHeight / clickedWidth) * clickedXInElem)
+        ret = () ->
+          return "crOvalRightRightBottomTriang" if Math.abs(fX) - Math.abs(clickedYInElem) > 0
+          return "crOvalRightBottomRightTriang" if Math.abs(fX) - Math.abs(clickedYInElem) < 0
+          return false if Math.abs(fX) - Math.abs(clickedYInElem) == 0
+        finalTriangId = ret()
+      when "crOvalRightLeftBottomTriang"
+        $clicked = $("#crOvalRightLeftBottomTriang")
+        clickedHeight = $clicked.outerHeight()
+        clickedWidth = $clicked.outerWidth()
+        clickedXInElem = e.pageX - $clicked.offset().left
+        clickedYInElem = e.pageY - $clicked.offset().top
+        fX = Math.round((clickedHeight / clickedWidth) * clickedXInElem - clickedHeight)
+
+        ret = () ->
+          return "crOvalRightLeftBottomTriang" if Math.abs(fX) - Math.abs(clickedYInElem) > 0
+          return "crOvalRightBottomLeftTriang" if Math.abs(fX) - Math.abs(clickedYInElem) < 0
+          return false if Math.abs(fX) - Math.abs(clickedYInElem) == 0
+        finalTriangId = ret()
+      when "crOvalRightBottomRightTriang"
+        finalTriangId = "crOvalRightBottomRightTriang"
+      when "crOvalRightBottomLeftTriang"
+        finalTriangId = "crOvalRightBottomLeftTriang"
+      when "crOvalRightLeftBottomTriang"
+        finalTriangId = "crOvalRightLeftBottomTriang"
+      when "crOvalRightLeftTopTriang"
+        finalTriangId = "crOvalRightLeftTopTriang"
+
+    return finalTriangId
 
 
   @lookBoxes: () ->
@@ -199,8 +315,7 @@ class App.Index
   @rgb2hex: (rgb, withHexSign) ->
     rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i)
     sign = ""
-    withHexSign ? sign =
-      "#": sign = ""
+    if !withHexSign? then sign = "#" else sign = ""
     if rgb and rgb.length == 4
       string = sign + (if rgb[1] is "255" then "FF" else ('0' + parseInt(rgb[1], 10).toString(16)).slice(-2)) +
         (if rgb[2] is "255" then "FF" else ('0' + parseInt(rgb[2], 10).toString(16)).slice(-2)) +
@@ -210,7 +325,23 @@ class App.Index
       return false
 
 
-
+  @colorLuminance = (hex, lum) ->
+  # validate hex string
+    hex = String(hex).replace(/[^0-9a-f]/gi, '')
+    if hex.length < 6
+      hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2]
+    lum = lum or 0
+    # convert to decimal and change luminosity
+    rgb = '#'
+    c = undefined
+    i = undefined
+    i = 0
+    while i < 3
+      c = parseInt(hex.substr(i * 2, 2), 16)
+      c = Math.round(Math.min(Math.max(0, c + c * lum), 255)).toString(16)
+      rgb += ('00' + c).substr(c.length)
+      i++
+    return rgb
 
 
 

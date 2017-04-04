@@ -66,7 +66,7 @@ $today = utf8_encode(strftime("%d. %m. %Y"));
                     class="fa fa-arrow-up"></i></div>
             <div id="crBoxScroller" class="absolute filler">
                 <?php
-                $boxes = ["AJAX", "MODALS", "OPENERS", "IMAGE", "ANIMATE", "TEST", "IMAGE", "ANIMATE"];
+                $boxes = ["AJAX", "MODALS", "OPENERS", "IMAGE", "ANIMATE", "TEST", "IMAGE", "ANIMATE", "CLIPPYPATH"];
                 foreach ($boxes as $box) {
                     ?>
                     <div class="height-35 width m-b-2">
@@ -87,54 +87,55 @@ $today = utf8_encode(strftime("%d. %m. %Y"));
             <div id="crOvalLeftContainer" class="absolute">
 
             </div>
-            <div id="crCenterTopLeftTriang" class="absolute crOvalButton hover">
+<!--            <i class="z-md fa fa-arrow-up absolute"></i>-->
+            <div id="crOvalCenterTopLeftTriang" class="absolute crOvalButton hover">
 
             </div>
-            <div id="crCenterTopRightTriang" class="absolute crOvalButton hover">
+            <div id="crOvalCenterTopRightTriang" class="absolute crOvalButton hover">
 
             </div>
-            <div id="crCenterBottomLeftTriang" class="absolute crOvalButton hover">
+            <div id="crOvalCenterBottomLeftTriang" class="absolute crOvalButton hover">
 
             </div>
-            <div id="crCenterBottomRightTriang" class="absolute crOvalButton hover">
+            <div id="crOvalCenterBottomRightTriang" class="absolute crOvalButton hover">
 
             </div>
-            <div id="crCenterLeftTopTriang" class="absolute crOvalButton hover">
+            <div id="crOvalCenterLeftTopTriang" class="absolute crOvalButton hover">
 
             </div>
-            <div id="crCenterLeftBottomTriang" class="absolute crOvalButton hover">
+            <div id="crOvalCenterLeftBottomTriang" class="absolute crOvalButton hover">
 
             </div>
-            <div id="crCenterRightTopTriang" class="absolute crOvalButton hover">
+            <div id="crOvalCenterRightTopTriang" class="absolute crOvalButton hover">
 
             </div>
-            <div id="crCenterRightBottomTriang" class="absolute crOvalButton hover">
+            <div id="crOvalCenterRightBottomTriang" class="absolute crOvalButton hover">
 
             </div>
             <div id="crOvalRightContainer" class="absolute">
                 <div class="filler relative">
-                    <div id="crOvalRightLeftUpper" class="absolute crOvalButton hover">
+                    <div id="crOvalRightLeftTopTriang" class="absolute crOvalButton hover">
 
                     </div>
-                    <div id="crOvalRightTopLeft" class="absolute crOvalButton hover">
+                    <div id="crOvalRightTopLeftTriang" class="absolute crOvalButton hover">
 
                     </div>
-                    <div id="crOvalRightTopRight" class="absolute crOvalButton hover">
+                    <div id="crOvalRightTopRightTriang" class="absolute crOvalButton hover">
 
                     </div>
-                    <div id="crOvalRightRightUpper" class="absolute crOvalButton hover">
+                    <div id="crOvalRightRightTopTriang" class="absolute crOvalButton hover">
 
                     </div>
-                    <div id="crOvalRightRightLower" class="absolute crOvalButton hover">
+                    <div id="crOvalRightRightBottomTriang" class="absolute crOvalButton hover">
 
                     </div>
-                    <div id="crOvalRightBottomRight" class="absolute crOvalButton hover">
+                    <div id="crOvalRightBottomRightTriang" class="absolute crOvalButton hover">
 
                     </div>
-                    <div id="crOvalRightBottomLeft" class="absolute crOvalButton hover">
+                    <div id="crOvalRightBottomLeftTriang" class="absolute crOvalButton hover">
 
                     </div>
-                    <div id="crOvalRightLeftLower" class="absolute crOvalButton hover">
+                    <div id="crOvalRightLeftBottomTriang" class="absolute crOvalButton hover">
 
                     </div>
                 </div>
